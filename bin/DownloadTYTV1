@@ -1,0 +1,142 @@
+#!/bin/bash
+
+#Date Variables
+yesterday=$(date --date="yesterday" +'%B %d, %Y')
+today=$(date +'%B %d, %Y')
+tomorrow=$(date --date="tomorrow" +'%B %d, %Y')
+curdate=$(date +'%B %d, %Y')
+
+#WGET variables
+lcookies=~/test/cookies.txt
+uagent="Mozilla/5.0 (X11; Manjaro; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0"
+
+#Filename variables
+#TDR
+TDRhtml=TheDamageReport.html
+TDRlog=TheDamageReport.log
+TDRvideo=The-Damage-Report-$(date +'%-m-%d-%Y').mp4
+
+#TYT
+TYThtml=TheMainShow.html
+TYTlog=TheMainShow.log
+TYTvideo=The-Main-Show-$(date +'%-m-%d-%Y').mp4
+
+#THCV
+THCVhtml=TheConversation.html
+THCVlog=TheConversation.log
+THCVvideo=The-Conversation-$(date +'%-m-%d-%Y').mp4
+
+#PSTG
+PSTGhtml=ThePostGame.html
+PSTGlog=ThePostGame.log
+PSTGvideo=The-Post-Game-$(date +'%-m-%d-%Y').mp4
+
+#Default
+DEFhtml=default.html
+DEFhtml2=$(date +'%B_%d_%Y')_default.html
+DEFlog=default.log
+DEFvideo=default-$(date +'%-m-%d-%Y').mp4
+
+RUNlog=runs.log
+
+#Directory variables
+TEMPdir="/home/monkinto/ScriptTEMP/"
+LOGdir="/home/monkinto/ScriptLogs/"
+NEWSdir="/home/monkinto/Videos/"
+TDRdir="/home/monkinto/Videos/TDR/"
+TYTdir="/home/monkinto/Videos/TYT/"
+PSTGdir="/home/monkinto/Videos/PSTG/"
+THCVdir="/home/monkinto/Videos/THCV/"
+
+#URL variables
+TYTURL="https://tyt.com/"
+TDR="https://tyt.com/shows/5Rz3k3CD7yyU488YokUoWi"
+TYT="https://tyt.com/shows/6e6Xst82zYACGGyweSOkMg"
+PSTG="https://tyt.com/shows/1GluS8los444qmMUW8koOq"
+THCV="https://tyt.com/shows/BblXc91PLEtOQ9ljnDJc0"
+
+#A function to download from the TYT website
+# $1=URL $2=Directory $3=File Name
+download_function () {
+	wget --load-cookies="$lcookies" --user-agent="$uagent" $1 --output-document="$2$3"
+}
+
+#A function to check if there is an episode for the show on the current date
+#$1=Show $2=Date
+check_for_episode () {
+	echo $2
+	case $1 in
+		TDR)
+			echo "Checking for The Damage Report on $2"
+			download_function "$TDR" "$TEMPdir" "$TDRhtml"
+			if [ "$(grep -c "$2" "$TEMPdir$TDRhtml")" -gt "0" ]
+			then
+				echo "Episode exists"
+				TDRvideo="The Damage Report $2.mp4"
+				echo $TDRvideo >> $LOGdir$TDRlog
+				url_grab_function "$TDRhtml" "$2" "$TDRdir" "$TDRvideo"
+			else
+				echo "No Episode :("
+			fi
+		;;
+		TYT)
+			echo "Checking for The Main Show on $2"
+			download_function "$TYT" "$TEMPdir" "$TYThtml"
+			if [ "$(grep -c "$2" "$TEMPdir$TYThtml")" -gt "0" ]
+			then
+				echo "Episode exists"
+				TYTvideo="The Main Show $2.mp4"
+				echo $TYTvideo >> $LOGdir$TYTlog
+				url_grab_function "$TYThtml" "$2" "$TYTdir" "$TYTvideo"
+			else
+				echo "No Episode :("
+			fi
+		;;
+		PSTG)
+			echo "Checking for The Post Game on $2"
+			download_function "$PSTG" "$TEMPdir" "$PSTGhtml"
+			if [ "$(grep -c "$2" "$TEMPdir$PSTGhtml")" -gt "0" ]
+			then
+				echo "Episode exists"
+				PSTGvideo="The Post Game $2.mp4"
+				echo $PSTGvideo >> $LOGdir$PSTGlog
+				url_grab_function "$PSTGhtml" "$2" "$PSTGdir" "$PSTGvideo"
+			else
+				echo "No Episode :("
+			fi
+		;;
+		THCV)
+			echo "Checking for The Conversation on $2"
+			download_function "$THCV" "$TEMPdir" "$THCVhtml"
+			if [ "$(grep -c "$2" "$TEMPdir$THCVhtml")" -gt "0" ]
+			then
+				echo "Episode exists"
+				THCVvideo="The Conversation $2.mp4"
+				echo $THCVvideo >> $LOGdir$THCVlog
+				url_grab_function "$THCVhtml" "$2" "$THCVdir" "$THCVvideo"
+			else
+				echo "No Episode :("
+			fi
+		;;
+	esac	
+}
+
+#A function to find the URL for the video file
+#$1=Show URL $2=Date $3=Show Directory $4=Output
+url_grab_function () {
+	#download_function $1 $TEMPdir $output1
+	echo "Grabing URL"
+	episode="https://tyt.com"
+	episode+=$(grep -o "$2.*" "$TEMPdir$1" | grep -o "/watch/.*" | cut -d '"' -f 1 | cut -d ' ' -f 1)
+	download_function "$episode" "$TEMPdir" "$DEFhtml2"
+	dllink="$(grep -o "hd_video_download_url.*" "$TEMPdir$DEFhtml2" | cut -d '\' -f 3 | grep -o "https://.*")"
+	download_function "$dllink" "$3" "$4"
+}
+
+echo "Ran @ $(date)" >> $LOGdir$RUNlog
+echo "blank" >> $LOGdir$DEFlog
+
+check_for_episode "TDR" "$yesterday"
+check_for_episode "TYT" "$yesterday"
+check_for_episode "THCV" "$yesterday"
+check_for_episode "PSTG" "$yesterday"

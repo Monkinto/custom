@@ -1,0 +1,9 @@
+rofi
+morc_menu
+feh
+polybar
+nitrogen
+arandr
+i3blocks
+i3status
+lxappearance

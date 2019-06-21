@@ -1,0 +1,7 @@
+#!/bin/bash
+
+timedatectl set-local-rtc 0 --adjust-system-clock
+
+timedatectl set-local-rtc 1
+
+

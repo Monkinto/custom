@@ -1,0 +1,264 @@
+#!/bin/bash
+
+#Variables
+#Date Variables
+yesterday=$(date --date="yesterday" +'%B %d, %Y')
+today=$(date +'%B %d, %Y')
+tomorrow=$(date --date="tomorrow" +'%B %d, %Y')
+curdate=$(date +'%B %d, %Y')
+
+#URL variables
+TYTURL="https://tyt.com/"
+TDR="https://tyt.com/shows/5Rz3k3CD7yyU488YokUoWi"
+TYT="https://tyt.com/shows/6e6Xst82zYACGGyweSOkMg"
+PSTG="https://tyt.com/shows/1GluS8los444qmMUW8koOq"
+THCV="https://tyt.com/shows/BblXc91PLEtOQ9ljnDJc0"
+
+#Filename variables
+#HTML Variables
+DEFhtml=default.html
+DEFhtml2=$(date +'%B_%d_%Y')_default.html
+TDRhtml=TheDamageReport.html
+TYThtml=TheMainShow.html
+THCVhtml=TheConversation.html
+PSTGhtml=ThePostGame.html
+
+#Video Name Variables
+DEFvideo=default-$(date +'%-m-%d-%Y').mp4
+TDRvideo=The-Damage-Report-$(date +'%-m-%d-%Y').mp4
+TYTvideo=The-Main-Show-$(date +'%-m-%d-%Y').mp4
+THCVvideo=The-Conversation-$(date +'%-m-%d-%Y').mp4
+PSTGvideo=The-Post-Game-$(date +'%-m-%d-%Y').mp4
+
+#Log Variables
+RUNlog=runs.log
+DEFlog=default.log
+TDRlog=TheDamageReport.log
+TYTlog=TheMainShow.log
+THCVlog=TheConversation.log
+PSTGlog=ThePostGame.log
+
+#Directory variables
+RESdir=/home/monkinto/ScriptRES/
+LOGdir=/home/monkinto/ScriptLogs/
+NEWSdir=/home/monkinto/Videos/
+TDRdir="The Damage Report/"
+TYTdir="The Young Turks/"
+PSTGdir="The Post Game/"
+THCVdir="The Conversation/"
+
+#WGET variables
+lcookies=$RESdir
+lcookies+="cookies.txt"
+uagent="Mozilla/5.0 (X11; Manjaro; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0"
+
+#A function to download from the TYT website
+# $1=URL $2=Directory $3=File Name
+download_function () {
+	wget --load-cookies="$lcookies" --user-agent="$uagent" $1 --output-document="$2$3"
+}
+
+#A function to find the URL for the video file
+#$1=Show URL $2=Date $3=Show Directory $4=Output $5=link selection
+url_grab_function () {
+	#download_function $1 $TEMPdir $output1
+	echo "Grabing URL"
+	echo $5
+	episode="https://tyt.com"
+	episode+=$(grep -o "$2.*" "$1" | sed -n "$5p" | grep -o "/watch/.*" | cut -d '"' -f 1 | cut -d ' ' -f 1)
+	download_function "$episode" "$RESdir" "$DEFhtml2"
+	dllink="$(grep -o "hd_video_download_url.*" "$RESdir$DEFhtml2" | cut -d '\' -f 3 | grep -o "https://.*")"
+	download_function "$dllink" "$3" "$4"
+}
+
+#A function to check if the resources for the script are available and create them if they dont
+check_for_files () {
+	#Checking for log files
+	echo "Checking for script files"
+	echo "Checking for existance of Log directory and files"
+	if [ -d "$LOGdir" ]; then
+		echo "$LOGdir Exists"
+	else
+		echo "Creating $LOGdir"
+		mkdir "$LOGdir"
+	fi
+	if [ -f "$LOGdir$RUNlog" ]; then
+		echo "$LOGdir$RUNlog Exists"
+	else
+		echo "Creating $LOGdir$RUNlog"
+		touch "$LOGdir$RUNlog"
+	fi
+	if [ -f "$LOGdir$DEFlog" ]; then
+		echo "$LOGdir$DEFlog Exists"
+	else
+		echo "Creating $LOGdir$DEFlog"
+		touch "$LOGdir$DEFlog"
+	fi
+	if [ -f "$LOGdir$TDRlog" ]; then
+		echo "$LOGdir$TDRlog Exists"
+	else
+		echo "Creating $LOGdir$TDRlog"
+		touch "$LOGdir$TDRlog"
+	fi
+	if [ -f "$LOGdir$TYTlog" ]; then
+		echo "$LOGdir$TYTlog Exists"
+	else
+		echo "Creating $LOGdir$TYTlog"
+		touch "$LOGdir$TYTlog"
+	fi
+	if [ -f "$LOGdir$THCVlog" ]; then
+		echo "$LOGdir$THCVlog Exists"
+	else
+		echo "Creating $LOGdir$THCVlog"
+		touch "$LOGdir$THCVlog"
+	fi
+	if [ -f "$LOGdir$PSTGlog" ]; then
+		echo "$LOGdir$PSTGlog Exists"
+	else
+		echo "Creating $LOGdir$THCVlog"
+		touch "$LOGdir$PSTGlog"
+	fi
+	echo ""
+	#Checking for script resources
+	echo "Checking for the existance of script resources"
+	if [ -d "$RESdir" ]; then
+		echo "$RESdir Exists"
+	else
+		echo "doesnt exist"
+		mkdir "$RESdir"
+	fi
+	echo ""
+	#Checking for media dicrectory
+	echo "Checking for the existance of the Media directories"
+	if [ -d "$NEWSdir" ]; then
+		echo "$NEWSdir Exists"
+	else
+		echo "Creating $NEWSdir"
+		mkdir "$NEWSdir"
+	fi
+	if [ -d "$NEWSdir$TDRdir" ]; then
+		echo "$NEWSdir$TDRdir Exists"
+	else
+		echo "Creating $NEWSdir$TDRdir"
+		mkdir "$NEWSdir$TDRdir"
+	fi
+	if [ -d "$NEWSdir$TYTdir" ]; then
+		echo "$NEWSdir$TYTdir Exists"
+	else
+		echo "Creating $NEWSdir$TYTdir"
+		mkdir "$NEWSdir$TYTdir"
+	fi
+	if [ -d "$NEWSdir$THCVdir" ]; then
+		echo "$NEWSdir$THCVdir Exists"
+	else
+		echo "Creating $NEWSdir$THCVdir"
+		mkdir "$NEWSdir$THCVdir"
+	fi
+	if [ -d "$NEWSdir$PSTGdir" ]; then
+		echo "$NEWSdir$PSTGdir Exists"
+	else
+		echo "Creating $NEWSdir$PSTGdir"
+		mkdir "$NEWSdir$PSTGdir"
+	fi
+	echo ""
+}
+
+#A function to check for episodes of the passed show on the passed date
+#$1=Show $2=Date
+check_for_episode () {
+	#echo "$2"
+	case $1 in
+		TDR)
+			echo "Checking for The Damage Report on $2"
+			theurl=$TDR
+			thedir="$NEWSdir$TDRdir"
+			thehtml=$TDRhtml
+			TDRvideo="The Damage Report $2.mp4"
+			thevideo=$TDRvideo
+			thelog=$TDRlog
+		;;
+		TYT)
+			echo "Checking for The Main Show on $2"
+			theurl=$TYT
+			thedir="$NEWSdir$TYTdir"
+			thehtml=$TYThtml
+			TYTvideo="The Main Show $2.mp4"
+			thevideo=$TYTvideo
+			thelog=$TYTlog
+		;;
+		THCV)
+			echo "Checking for The Conversation on $2"
+			theurl=$THCV
+			thedir="$NEWSdir$THCVdir"
+			thehtml=$THCVhtml
+			THCVvideo="The Conversation $2.mp4"
+			thevideo=$THCVvideo
+			thelog=$THCVlog
+		;;
+		PSTG)
+			echo "Checking for The Post Game on $2"
+			theurl=$PSTG
+			thedir="$NEWSdir$PSTGdir"
+			thehtml=$PSTGhtml
+			PSTGvideo="The Post Game $2.mp4"
+			thevideo=$PSTGvideo
+			thelog=$PSTGlog
+		;;
+	esac
+	download_function "$theurl" "$RESdir" "$thehtml"
+	episodecount="$(grep -c "$2" "$RESdir$thehtml")"
+
+	if [ "$episodecount" -gt "0" ]; then
+		echo "There are $episodecount episode(s) for $2!"
+		if [ "$episodecount" -gt "2" ]; then
+			thevideo=$(echo "$thevideo" | cut -d '.' -f 1)
+			for ((i = 1 ; i <= $episodecount ; i++)); do
+				thevideotemp="$thevideo Part $i.mp4"
+				echo $thevideotemp >> "$LOGdir$thelog"
+				url_grab_function "$thehtml" "$2" "$thedir" "$thevideotemp" "$i"
+			done
+		else
+			echo $thevideo >> "$LOGdir$thelog"
+			url_grab_function "$thehtml" "$2" "$thedir" "$thevideo" "1"
+		fi
+	else
+		echo "No episode :("
+	fi
+
+	#if [ "$(grep -c "$2" "$RESdir$thehtml")" -gt "0" ]; then
+	#	echo "Episode exists!"
+	#	echo $thevideo >> "$LOGdir$thelog"
+	#	url_grab_function "$thehtml" "$2" "$thedir" "$thevideo"
+	#else
+	#	echo "No episode :("
+	#fi
+	#case $episodecount in
+	#	1)
+	#		echo "Episode exists!"
+	#		echo $thevideo >> "$LOGdir$thelog"
+	#		url_grab_function "$thehtml" "$2" "$thedir" "$thevideo" "1"
+	#	;;
+	#	2)
+	#		echo "2 Episodes exists!"
+	#		echo $thevideo >> "$LOGdir$thelog"
+	#		thevideo=$(echo "$thevideo" | cut -d '.' -f 1)
+	#		thevideo1="$thevideo""Part 1.mp4"
+	#		url_grab_function "$thehtml" "$2" "$thedir" "$thevideo1" "1"
+	#		thevideo2="$thevideo""Part 2.mp4"
+	#		url_grab_function "$thehtml" "$2" "$thedir" "$thevideo2" "2"
+	#	;;
+	#	0)
+	#		echo "No episode :("
+	#	;;
+	#esac
+}
+
+check_for_files
+
+echo "Ran @ $(date)" >> $LOGdir$RUNlog
+#echo "blank" >> $LOGdir$DEFlog
+
+check_for_episode "TDR" "$today"
+check_for_episode "TYT" "$yesterday"
+check_for_episode "THCV" "$yesterday"
+check_for_episode "PSTG" "$yesterday"

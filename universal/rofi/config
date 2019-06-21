@@ -7,7 +7,7 @@
 ! "Number of columns" Set from: Default
 ! rofi.columns:                        1
 ! "Font to use" Set from: Default
- rofi.font:                           roboto 14
+ rofi.font:                           roboto 32
 ! "Border width" Set from: Default
 ! rofi.bw:                             1
 ! "Location on screen" Set from: Default
@@ -21,7 +21,7 @@
 ! "Always show number of lines" Set from: Default
 ! rofi.fixed-num-lines:                true
 ! "Whether to load and show icons" Set from: Default
-! rofi.show-icons:                     false
+ rofi.show-icons:                      true
 ! "Terminal to use" Set from: Default
 ! rofi.terminal:                       rofi-sensible-terminal
 ! "Ssh client to use" Set from: Default
@@ -89,7 +89,7 @@
 ! "Fake transparency *DEPRECATED*" Set from: Default
 ! rofi.fake-transparency:              false
 ! "DPI" Set from: Default
- rofi.dpi:                            260
+! rofi.dpi:                            260
 ! "Threads to use for string matching" Set from: Default
 ! rofi.threads:                        0
 ! "Scrollbar width *DEPRECATED*" Set from: Default

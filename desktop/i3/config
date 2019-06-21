@@ -275,6 +275,7 @@ bindsym $mod+r mode "resize"
 bar {
         font pango:roboto 12
         #font pango:font awesome 12
+        tray_output primary
         status_command i3blocks -c /home/monkinto/.config/i3blocks/i3blocks.conf
 }
 
@@ -290,7 +291,7 @@ bar {
 
 
 # You can also use any non-zero value if you'd like to have a border
-for_window [class=".*"] border pixel 0
+for_window [class=".*"] border pixel 1
 
 # Hide borders
 hide_edge_borders none

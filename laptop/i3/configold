@@ -48,8 +48,7 @@ bindsym $mod+shift+d exec rofi -show run -config /home/monkinto/.config/rofi/con
 bindsym $mod+z exec --no-startup-id morc_menu
 
 # start a terminal
-#bindsym $mod+Return exec i3-sensible-terminal
-bindsym $mod+Return exec termite
+bindsym $mod+Return exec i3-sensible-terminal
 
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that

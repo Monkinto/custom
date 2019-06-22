@@ -74,6 +74,11 @@ bindsym $mod+u exec playerctl stop
 bindsym $mod+p exec playerctl next
 bindsym $mod+i exec playerctl previous
 
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioStop exec playerctl stop
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+
 # Screenshot shortcut
 bindsym Print exec gnome-screenshot
 bindsym $mod+Print exec gnome-screenshot --interactive
@@ -253,17 +258,16 @@ bar {
 
 # Theme colors
 # class                   border  backgr. text    indic.   child_border
-  client.focused          #556064 #556064 #80FFF9 #FDF6E3
-  client.focused_inactive #2F3D44 #2F3D44 #1ABC9C #454948
-  client.unfocused        #2F3D44 #2F3D44 #1ABC9C #454948
-  client.urgent           #CB4B16 #FDF6E3 #1ABC9C #268BD2
-  client.placeholder      #000000 #0c0c0c #ffffff #000000 
+  client.focused          #7ce552 #556064 #80FFF9 #FDF6E3  #7ce552
+  client.focused_inactive #29841d #2F3D44 #1ABC9C #454948  #29841d
+  client.unfocused        #2F3D44 #2F3D44 #1ABC9C #454948  #2F3D44
+  client.urgent           #CB4B16 #FDF6E3 #1ABC9C #268BD2  #CB4B16
+  client.placeholder      #000000 #0c0c0c #ffffff #000000  #000000
 
   client.background       #2B2C2B
 
-
 # You can also use any non-zero value if you'd like to have a border
-for_window [class=".*"] border pixel 0
+for_window [class=".*"] border pixel 1
 
 # Hide borders
 hide_edge_borders none
@@ -335,13 +339,13 @@ mode "$mode_gaps_outer" {
 
 ### Desktop
 exec --no-startup-id nitrogen --restore; sleep 1; compton -b #Wallpaper
-exec --no-startup-id start_conky_maia #Desktop Widgets
+exec --no-startup-id run_conky.sh #Desktop Widgets
 
 ### Display
 #exec "xrandr --dpi 260"
 
 ### Security
-exec --no-startup-id xautolock -time 15 -locker "Lock-Computer"
+exec --no-startup-id xautolock -time 15 -detectsleep -locker "Lock-Computer"
 
 ### ???
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1

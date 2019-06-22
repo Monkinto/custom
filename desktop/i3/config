@@ -375,7 +375,7 @@ exec --no-startup-id start_conky_maia #Desktop Widgets
 exec xrandr --output DP-0 --mode 1920x1080 --pos 0x420 --rotate normal --output DP-1 --off --output DP-2 --off --output DP-3 --mode 1920x1080 --pos 3840x0 --rotate left --output HDMI-0 --off --output DP-4 --primary --mode 1920x1080 --pos 1920x420 --rotate normal --output DP-5 --off
 
 ### Security
-exec --no-startup-id xautolock -time 15 -locker "Lock-Computer"
+exec --no-startup-id xautolock -time 60 -locker "Lock-Computer"
 
 ### ???
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1

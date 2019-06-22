@@ -368,7 +368,7 @@ mode "$mode_gaps_outer" {
 
 ### Desktop
 exec --no-startup-id nitrogen --restore; sleep 1; compton -b #Wallpaper
-exec --no-startup-id start_conky_maia #Desktop Widgets
+exec --no-startup-id run_conky.sh #Desktop Widgets
 
 ### Display
 #exec "xrandr --dpi 260"

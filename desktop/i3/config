@@ -59,6 +59,7 @@ bindsym $mod+Return exec termite
 # Program Shortcuts
 ###############################################################################
 bindsym $mod+F2 exec firefox --new-window
+bindsym $mod+n exec nemo
 
 ###############################################################################
 # System Control Keybinds

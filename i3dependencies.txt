@@ -7,3 +7,7 @@ arandr
 i3blocks
 i3status
 lxappearance
+playerctl
+blueman
+volumeicon
+compton

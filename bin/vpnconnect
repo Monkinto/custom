@@ -1,0 +1,3 @@
+#!/bin/bash
+
+sudo openvpn --client --config /etc/openvpn/client.conf

@@ -233,67 +233,67 @@ set tabsize 2
 
 
 ## Nanorc files
-include "~/nanoConfig/nanorc.nanorc"
+include "~/.config/nano/nanorc.nanorc"
 
 ## C/C++
-include "~/nanoConfig/c.nanorc"
+include "~/.config/nano/c.nanorc"
 
 ## Cascading Style Sheets
-include "~/nanoConfig/css.nanorc"
+include "~/.config/nano/css.nanorc"
 
 ## Debian files
-include "~/nanoConfig/debian.nanorc"
+include "~/.config/nano/debian.nanorc"
 
 ## Gentoo files
-include "~/nanoConfig/gentoo.nanorc"
+include "~/.config/nano/gentoo.nanorc"
 
 ## HTML
-include "~/nanoConfig/html.nanorc"
+include "~/.config/nano/html.nanorc"
 
 ## PHP
-include "~/nanoConfig/php.nanorc"
+include "~/.config/nano/php.nanorc"
 
 ## TCL
-include "~/nanoConfig/tcl.nanorc"
+include "~/.config/nano/tcl.nanorc"
 
 ## TeX
-include "~/nanoConfig/tex.nanorc"
+include "~/.config/nano/tex.nanorc"
 
 ## Quoted emails (under e.g. mutt)
-include "~/nanoConfig/mutt.nanorc"
+include "~/.config/nano/mutt.nanorc"
 
 ## Patch files
-include "~/nanoConfig/patch.nanorc"
+include "~/.config/nano/patch.nanorc"
 
 ## Manpages
-include "~/nanoConfig/man.nanorc"
+include "~/.config/nano/man.nanorc"
 
 ## Groff
-include "~/nanoConfig/groff.nanorc"
+include "~/.config/nano/groff.nanorc"
 
 ## Perl
-include "~/nanoConfig/perl.nanorc"
+include "~/.config/nano/perl.nanorc"
 
 ## Python
-include "~/nanoConfig/python.nanorc"
+include "~/.config/nano/python.nanorc"
 
 ## Ruby
-include "~/nanoConfig/ruby.nanorc"
+include "~/.config/nano/ruby.nanorc"
 
 ## Java
-include "~/nanoConfig/java.nanorc"
+include "~/.config/nano/java.nanorc"
 
 ## AWK
-include "~/nanoConfig/awk.nanorc"
+include "~/.config/nano/awk.nanorc"
 
 ## Assembler
-include "~/nanoConfig/asm.nanorc"
+include "~/.config/nano/asm.nanorc"
 
 ## Bourne shell scripts
-include "~/nanoConfig/sh.nanorc"
+include "~/.config/nano/sh.nanorc"
 
 ## POV-Ray
-include "~/nanoConfig/pov.nanorc"
+include "~/.config/nano/pov.nanorc"
 
 ## XML-type files
-include "~/nanoConfig/xml.nanorc"
+include "~/.config/nano/xml.nanorc"

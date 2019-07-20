@@ -1,5 +1,5 @@
 ! "Enabled modi" Set from: Default
-! rofi.modi:                           window,run,ssh
+ rofi.modi:                           window,drun,run,ssh
 ! "Window width" Set from: Default
 ! rofi.width:                          50
 ! "Number of lines" Set from: Default
@@ -23,9 +23,9 @@
 ! "Whether to load and show icons" Set from: Default
  rofi.show-icons:                      true
 ! "Terminal to use" Set from: Default
-! rofi.terminal:                       rofi-sensible-terminal
+ rofi.terminal:                       termite
 ! "Ssh client to use" Set from: Default
-! rofi.ssh-client:                     ssh
+ rofi.ssh-client:                     mosh
 ! "Ssh command to execute" Set from: Default
 ! rofi.ssh-command:                    {terminal} -e {ssh-client} {host}
 ! "Run command to execute" Set from: Default
@@ -57,7 +57,7 @@
 ! "Cycle through the results list" Set from: Default
 ! rofi.cycle:                          true
 ! "Enable sidebar-mode" Set from: Default
-! rofi.sidebar-mode:                   false
+ rofi.sidebar-mode:                   true
 ! "Row height (in chars)" Set from: Default
 ! rofi.eh:                             1
 ! "Enable auto select mode" Set from: Default

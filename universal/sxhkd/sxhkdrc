@@ -7,8 +7,12 @@ super + Return
 	termite
 
 # program launcher
-super + @space
-	rofi -show drun -config /home/monkinto/.config/rofi/config
+super + {_,shift,alt + }@space
+	rofi -show {drun,run,ssh} #-config /home/monkinto/.config/rofi/config
+
+# launcher
+#super +  {_,shift + }semicolon
+# 	rofi -show {run,ssh} -config /home/monkinto/.config/rofi/config
 
 # make sxhkd reload its configuration files:
 super + Escape

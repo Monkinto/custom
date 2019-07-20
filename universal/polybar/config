@@ -30,7 +30,49 @@ alert = #bd2c40
 
 ##################################################################################################################
 [laptopvars]
+width = 100%
+height = 56
+;offset-x = 1%
+;offset-y = 1%
+radius = 12.0
+fixed-center = false
+bottom = true
 
+line-size = 3
+line-color = #f00
+
+border-size = 4
+border-color = #00000000
+
+padding-left = 0
+padding-right = 0
+
+module-margin-left = 1
+module-margin-right = 1
+
+font-0 = "Roboto Mono:pixelsize=24;1"
+font-1 = "unifont:fontformat=truetype:size=24:antialias=false;0"
+font-2 = "Font Awesome 5 Brands:size=24;1"
+font-3 = "Font Awesome 5 Free Regular:size=24;1"
+font-4 = "Font Awesome 5 Free Solid:size=24;1"
+
+tray-position = right
+tray-padding = 1
+;tray-background = #0063ff
+
+wm-restack = bspwm
+;wm-restack = i3
+
+;override-redirect = true
+
+;scroll-up = bspwm-desknext
+;scroll-down = bspwm-deskprev
+
+;scroll-up = i3wm-wsnext
+;scroll-down = i3wm-wsprev
+
+cursor-click = pointer
+cursor-scroll = ns-resize
 
 ##################################################################################################################
 [desktopvars]
@@ -80,7 +122,51 @@ cursor-scroll = ns-resize
 
 ##################################################################################################################
 [bar/portable-screen]
+;monitor = ${env:MONITOR:DP-4}
+width = ${laptopvars.width}
+height = ${laptopvars.height}
+radius = ${laptopvars.radius}
+fixed-center = ${laptopvars.fixed-center}
+bottom = ${laptopvars.bottom}
 
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = ${laptopvars.line-size}
+line-color = ${laptopvars.line-color}
+
+border-size = ${laptopvars.border-size}
+border-color = ${laptopvars.border-color}
+
+padding-left = ${laptopvars.padding-left}
+padding-right = ${laptopvars.padding-right}
+
+module-margin-left = ${laptopvars.module-margin-left}
+module-margin-right = ${laptopvars.module-margin-right}
+
+font-0 = ${laptopvars.font-0}
+font-1 = ${laptopvars.font-1}
+font-2 = ${laptopvars.font-2}
+font-3 = ${laptopvars.font-3}
+font-4 = ${laptopvars.font-4}
+
+modules-left = bspwm
+modules-center = 
+modules-right = filesystem xbacklight pulseaudio memory cpu wlan eth battery temperature date powermenu
+
+tray-position = ${laptopvars.tray-position}
+tray-padding = ${laptopvars.tray-padding}
+;tray-background = ${laptopvars.tray-background}
+
+wm-restack = ${laptopvars.wm-restack}
+
+;override-redirect = ${laptopvars.override-redirect}
+
+;scroll-up = ${laptopvars.scroll-up}
+;scroll-down = ${laptopvars.scroll-down}
+
+cursor-click = ${laptopvars.cursor-click}
+cursor-scroll = ${laptopvars.cursor-scroll}
 
 ##################################################################################################################
 [bar/primary-screen]

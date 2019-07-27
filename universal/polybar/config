@@ -698,7 +698,7 @@ expand-right = true
 
 format-spacing = 0
 
-label-open = power 
+label-open =  
 label-open-foreground = ${colors.secondary}
 label-close =  cancel
 label-close-foreground = ${colors.secondary}

@@ -151,7 +151,7 @@ font-3 = ${laptopvars.font-3}
 font-4 = ${laptopvars.font-4}
 
 modules-left = bspwm-laptop
-modules-center = 
+modules-center = i3-blocks
 modules-right = filesystem xbacklight pulseaudio memory cpu wlan eth battery temperature date powermenu
 
 tray-position = ${laptopvars.tray-position}
@@ -318,6 +318,14 @@ cursor-scroll = ${desktopvars.cursor-scroll}
 [module/xwindow]
 type = internal/xwindow
 label = %title:0:30:...%
+
+##################################################################################################################
+[module/i3-blocks]
+type = custom/script
+
+exec = i3blocks -c /home/monkinto/.config/i3blocks/i3blocks.conf
+
+tail = true
 
 ##################################################################################################################
 [module/xkeyboard]

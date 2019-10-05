@@ -79,6 +79,9 @@ bindsym XF86AudioStop exec playerctl stop
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
+#Lock commands
+
+
 # Screenshot shortcut
 bindsym Print exec gnome-screenshot
 bindsym $mod+Print exec gnome-screenshot --interactive
@@ -343,6 +346,7 @@ exec --no-startup-id run_conky.sh #Desktop Widgets
 
 ### Display
 #exec "xrandr --dpi 260"
+exec --no-startup-id touchegg
 
 ### Security
 exec --no-startup-id xautolock -time 15 -detectsleep -locker "Lock-Computer"

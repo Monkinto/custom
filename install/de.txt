@@ -1,0 +1,7 @@
+qtile
+nitrogen
+lxappearance
+blueman
+volumeicon
+compton
+rofi

@@ -62,6 +62,7 @@ keys = [
     Key([mod, "control"], "r", lazy.restart()),
     Key([mod, "control"], "q", lazy.shutdown()),
     Key([mod], "r", lazy.spawn("rofi -show drun -config /home/monkinto/.config/rofi/config")),
+    Key([mod, "shift"], "r", lazy.spawn("rofi -show run -config /home/monkinto/.config/rofi/config")),
 ]
 
 groups = [Group(i) for i in "1234567890"]

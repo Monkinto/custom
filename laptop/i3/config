@@ -69,10 +69,10 @@ bindsym XF86MonBrightnessUp exec xbacklight -inc 5 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 5 # decrease screen brightness
 
 # Media player controls
-bindsym $mod+o exec playerctl play-pause
-bindsym $mod+u exec playerctl stop
-bindsym $mod+p exec playerctl next
-bindsym $mod+i exec playerctl previous
+bindsym $mod+p exec playerctl play-pause
+bindsym $mod+o exec playerctl stop
+bindsym $mod+] exec playerctl next
+bindsym $mod+[ exec playerctl previous
 
 bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioStop exec playerctl stop

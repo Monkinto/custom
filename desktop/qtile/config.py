@@ -30,6 +30,10 @@ from libqtile import layout, bar, widget
 
 from typing import List  # noqa: F401
 
+from libqtile import hook
+from libqtile import os
+from libqtile import subprocess
+
 mod = "mod4"
 
 keys = [
@@ -62,6 +66,7 @@ keys = [
     Key([mod, "control"], "r", lazy.restart()),
     Key([mod, "control"], "q", lazy.shutdown()),
     Key([mod], "r", lazy.spawn("rofi -show drun -config /home/monkinto/.config/rofi/config")),
+    Key([mod, "shift"], "r", lazy.spawn("rofi -show run -config /home/monkinto/.config/rofi/config")),
 ]
 
 groups = [Group(i) for i in "1234567890"]
@@ -80,6 +85,11 @@ layouts = [
     layout.Stack(num_stacks=2)
 ]
 
+@hook.subscribe.statup_once
+def autostart():
+	home= os.path.expanduser('~/bin/qtile_startup.sh')
+	subprocess.call([home])
+
 widget_defaults = dict(
     font='roboto',
     fontsize=24,
@@ -94,7 +104,6 @@ screens = [
                 widget.GroupBox(),
                 widget.Prompt(),
                 widget.WindowName(),
-                widget.TextBox("default config", name="default"),
                 widget.Systray(),
                 widget.Clock(format='%Y-%m-%d %a %I:%M %p'),
             ],

@@ -30,18 +30,18 @@ alert = #bd2c40
 
 ##################################################################################################################
 [laptopvars]
-width = 100%
-height = 56
+width = 105%
+height = 34
 ;offset-x = 1%
 ;offset-y = 1%
-radius = 12.0
+radius = 0.0
 fixed-center = false
-bottom = true
+bottom = false
 
-line-size = 3
+line-size = 2
 line-color = #f00
 
-border-size = 4
+border-size = 0
 border-color = #00000000
 
 padding-left = 0
@@ -50,15 +50,16 @@ padding-right = 0
 module-margin-left = 1
 module-margin-right = 1
 
-font-0 = "Roboto Mono:pixelsize=24;1"
-font-1 = "unifont:fontformat=truetype:size=24:antialias=false;0"
-font-2 = "Font Awesome 5 Brands:size=24;1"
-font-3 = "Font Awesome 5 Free Regular:size=24;1"
-font-4 = "Font Awesome 5 Free Solid:size=24;1"
+font-0 = "Roboto Mono:pixelsize=18;1"
+font-1 = "unifont:fontformat=truetype:size=18:antialias=false;0"
+font-2 = "Font Awesome 5 Brands:size=18;1"
+font-3 = "Font Awesome 5 Free Regular:size=18;1"
+font-4 = "Font Awesome 5 Free Solid:size=18;1"
 
 tray-position = right
-tray-padding = 1
-;tray-background = #0063ff
+tray-maxsize = 24
+tray-padding = 0
+tray-background = #0063ff
 
 wm-restack = bspwm
 ;wm-restack = i3
@@ -84,7 +85,7 @@ radius = 3.0
 fixed-center = false
 bottom = true
 
-line-size = 3
+line-size = 4
 line-color = #f00
 
 border-size = 4
@@ -103,8 +104,8 @@ font-3 = "Font Awesome 5 Free Regular:size=12;1"
 font-4 = "Font Awesome 5 Free Solid:size=12;1"
 
 tray-position = right
-tray-padding = 1
-;tray-background = #0063ff
+tray-padding = 0
+tray-background = #0063ff
 
 wm-restack = bspwm
 ;wm-restack = i3
@@ -150,9 +151,11 @@ font-2 = ${laptopvars.font-2}
 font-3 = ${laptopvars.font-3}
 font-4 = ${laptopvars.font-4}
 
-modules-left = bspwm-laptop
-modules-center = i3-blocks
-modules-right = filesystem xbacklight pulseaudio memory cpu wlan eth battery temperature date powermenu
+modules-left = i3
+modules-center = 
+modules-right = filesystem pulseaudio wlan eth battery date
+
+separator = |
 
 tray-position = ${laptopvars.tray-position}
 tray-padding = ${laptopvars.tray-padding}
@@ -351,7 +354,7 @@ interval = 25
 
 mount-0 = /
 
-label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
+label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %free%
 label-unmounted = %mountpoint% not mounted
 label-unmounted-foreground = ${colors.foreground-alt}
 
@@ -451,13 +454,14 @@ label-mode-foreground = #000
 label-mode-background = ${colors.primary}
 
 ; focused = Active workspace on focused monitor
-label-focused = %index%: %icon%
+label-focused = %index%:%icon%
 label-focused-background = ${module/bspwm.label-focused-background}
 label-focused-underline = ${module/bspwm.label-focused-underline}
+;label-focused-overline = ${module/bspwm.label-focused-underline}
 label-focused-padding = ${module/bspwm.label-focused-padding}
 
 ; unfocused = Inactive workspace on any monitor
-label-unfocused = %index%: %icon%
+label-unfocused = %index%:%icon%
 label-unfocused-padding = ${module/bspwm.label-occupied-padding}
 
 ; visible = Active workspace on unfocused monitor
@@ -467,7 +471,7 @@ label-visible-underline = ${self.label-focused-underline}
 label-visible-padding = ${self.label-focused-padding}
 
 ; urgent = Workspace with urgency hint set
-label-urgent = %index%: %icon%
+label-urgent = %index%:%icon%
 label-urgent-background = ${module/bspwm.label-urgent-background}
 label-urgent-padding = ${module/bspwm.label-urgent-padding}
 
@@ -533,17 +537,18 @@ label = RAM: %percentage_used%%
 ##################################################################################################################
 [module/wlan]
 type = internal/network
-interface = net1
+interface = wlp60s0
 interval = 3.0
 
-format-connected = <ramp-signal> <label-connected>
+;format-connected = <ramp-signal> <label-connected>
+format-connected = <label-connected>
 format-connected-underline = #9f78e1
-label-connected = %essid%
+;format-connected-overline = #9f78e1
+label-connected = %essid% - %local_ip%
 
-format-disconnected =
-;format-disconnected = <label-disconnected>
+format-disconnected = <label-disconnected>
 ;format-disconnected-underline = ${self.format-connected-underline}
-;label-disconnected = %ifname% disconnected
+label-disconnected = %ifname% disconnected
 ;label-disconnected-foreground = ${colors.foreground-alt}
 
 ramp-signal-0 = 
@@ -573,10 +578,10 @@ format-disconnected =
 ##################################################################################################################
 [module/date]
 type = internal/date
-interval = 5
+interval = 1
 
-date = "%b-%d"
-date-alt = "%B-%d-%Y"
+date = "%b %d"
+date-alt = "%B %d %Y"
 
 time = %I:%M %p
 time-alt = %I:%M:%S %p
@@ -591,8 +596,8 @@ label = %date% %time%
 [module/pulseaudio]
 type = internal/pulseaudio
 
-format-volume = <label-volume> <bar-volume>
-label-volume = VOL %percentage%%
+format-volume = <label-volume>
+label-volume =  %percentage%%
 label-volume-foreground = ${root.foreground}
 
 label-muted = 🔇 muted
@@ -651,17 +656,20 @@ battery = BAT0
 adapter = ADP1
 full-at = 98
 
-format-charging = <animation-charging> <label-charging>
+format-charging = <animation-charging> <label-charging> 
 format-charging-underline = #ffb52a
+label-charging = %time% %percentage%%
 
-format-discharging = <animation-discharging> <label-discharging>
+format-discharging = <animation-discharging> <label-discharging> 
 format-discharging-underline = ${self.format-charging-underline}
+label-discharging = %time% %percentage%%
 
-format-full-prefix = " "
+
+format-full-prefix = ""
 format-full-prefix-foreground = ${colors.foreground-alt}
 format-full-underline = ${self.format-charging-underline}
 
-ramp-capacity-0 = 
+ramp-capacity-0 = 
 ramp-capacity-1 = 
 ramp-capacity-2 = 
 ramp-capacity-foreground = ${colors.foreground-alt}
@@ -672,7 +680,7 @@ animation-charging-2 = 
 animation-charging-foreground = ${colors.foreground-alt}
 animation-charging-framerate = 750
 
-animation-discharging-0 = 
+animation-discharging-0 = 
 animation-discharging-1 = 
 animation-discharging-2 = 
 animation-discharging-foreground = ${colors.foreground-alt}

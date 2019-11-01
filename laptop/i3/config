@@ -349,7 +349,7 @@ exec --no-startup-id run_conky.sh #Desktop Widgets
 exec --no-startup-id touchegg
 
 ### Security
-exec --no-startup-id xautolock -time 15 -detectsleep -locker "Lock-Computer"
+exec --no-startup-id xautolock -time 30 -detectsleep -locker "Lock-Computer"
 
 exec --no-startup-id laptop-polybar.sh
 

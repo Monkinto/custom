@@ -151,11 +151,13 @@ font-2 = ${laptopvars.font-2}
 font-3 = ${laptopvars.font-3}
 font-4 = ${laptopvars.font-4}
 
+fix-center=true
+
 modules-left = i3
-modules-center = 
+modules-center = spotify
 modules-right = filesystem pulseaudio wlan eth battery date
 
-separator = |
+separator = 
 
 tray-position = ${laptopvars.tray-position}
 tray-padding = ${laptopvars.tray-padding}
@@ -316,6 +318,14 @@ wm-restack = ${desktopvars.wm-restack}
 cursor-click = ${desktopvars.cursor-click}
 cursor-scroll = ${desktopvars.cursor-scroll}
 
+##################################################################################################################
+[module/spotify]
+type = custom/script
+interval = 1
+format-prefix = " "
+format = <label>
+exec = spotify_status.py -f '{artist}: {song}'
+format-underline = #1db954
 
 ##################################################################################################################
 [module/xwindow]

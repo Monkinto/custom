@@ -35,7 +35,7 @@ height = 34
 ;offset-x = 1%
 ;offset-y = 1%
 radius = 0.0
-fixed-center = false
+fixed-center = true
 bottom = false
 
 line-size = 2
@@ -82,7 +82,7 @@ height = 26
 ;offset-x = 1%
 ;offset-y = 1%
 radius = 3.0
-fixed-center = false
+fixed-center = true
 bottom = true
 
 line-size = 4
@@ -151,11 +151,9 @@ font-2 = ${laptopvars.font-2}
 font-3 = ${laptopvars.font-3}
 font-4 = ${laptopvars.font-4}
 
-fix-center=true
-
 modules-left = i3
 modules-center = spotify
-modules-right = filesystem pulseaudio wlan eth battery date
+modules-right = filesystem wlan eth battery date
 
 separator = 
 
@@ -552,9 +550,11 @@ interval = 3.0
 
 ;format-connected = <ramp-signal> <label-connected>
 format-connected = <label-connected>
+format-contected-alternate = <label-alternate>
 format-connected-underline = #9f78e1
 ;format-connected-overline = #9f78e1
 label-connected = %essid% - %local_ip%
+label-alternate = %essid%
 
 format-disconnected = <label-disconnected>
 ;format-disconnected-underline = ${self.format-connected-underline}

@@ -18,9 +18,25 @@ runtime! archlinux.vim
 "let skip_defaults_vim=1
 set backspace=indent,eol,start
 
+" Basics
+set nocompatible
+set title
+
+" Syntax stuff
+syntax on
+
+" Line Numbering
+set number
 set relativenumber
 
-set nocompatible
+" Cursor
+set scrolloff=10
 
-set title
+" Status Bar
+set laststatus=2
+
+" Last Line
+set showmode
+set showcmd
+
 

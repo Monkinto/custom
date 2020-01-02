@@ -1,0 +1,1 @@
+xautolock -time 30 -detectsleep -locker "Lock-Computer" &
